@@ -17,14 +17,36 @@ export default function TeamsGrid({
       {teams.map((team: TeamWithMeta) => (
         <div
           key={team.id}
+        <div
+          key={team.id}
           onClick={() => onSelect?.(team.id)}
-          className="cursor-pointer rounded-lg overflow-hidden shadow hover:scale-105 transition-transform"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              onSelect?.(team.id)
+            }
+          }}
+          tabIndex={onSelect ? 0 : -1}
+          role="button"
+          aria-label={`Select ${team.full_name}`}
+        <div
+          key={team.id}
+          onClick={() => onSelect?.(team.id)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              onSelect?.(team.id)
+            }
+          }}
+          tabIndex={onSelect ? 0 : -1}
+          role="button"
+          aria-label={`Select ${team.full_name}`}
+          className="cursor-pointer rounded-lg overflow-hidden shadow hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-blue-500"
           style={{
             backgroundColor: team.primaryColor ?? "#eee",
             color: team.secondaryColor ?? "#000",
           }}
         >
-          {team.logoUrl && (
             <img
               src={team.logoUrl}
               alt={`${team.full_name} logo`}
