@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "abbreviation": "ATL",
+    "full_name": "Atlanta Hawks",
+    "primaryColor": "#E03A3E",
+    "secondaryColor": "#C1D32F",
+    "logoUrl": ""
+  },
+  {
+    "id": 2,
+    "abbreviation": "BOS",
+    "full_name": "Boston Celtics",
+    "primaryColor": "#007A33",
+    "secondaryColor": "#BA9653",
+    "logoUrl": ""
+  }
+]
