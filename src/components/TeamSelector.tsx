@@ -9,8 +9,18 @@ export default function TeamSelector({
 }) {
   const { data: teams, isLoading, error } = useTeams();
 
-  if (isLoading) return <p>Loading teams…</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (isLoading)
+    return (
+      <p role="status" aria-live="polite">
+        Loading teams…
+      </p>
+    );
+  if (error)
+    return (
+      <p role="alert" aria-live="assertive">
+        Error: {error?.message || "Failed to load teams"}
+      </p>
+    );
 
   return (
     <motion.div
@@ -18,8 +28,10 @@ export default function TeamSelector({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
+      role="group"
+      aria-label="Select NBA team"
     >
-      {teams!.map((team) => (
+      {teams?.map((team) => (
         <button
           key={team.id}
           className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"

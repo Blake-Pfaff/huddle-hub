@@ -14,6 +14,7 @@ export type Team = {
 
 export const fetchTeams = async (): Promise<Team[]> => {
   const res = await fetch("/api/teams");
+  console.log(res, "RES");
   if (!res.ok) throw new Error("Network response was not ok");
   return res.json();
 };
