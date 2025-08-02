@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏈 HuddleHub
 
-## Getting Started
+Welcome to **HuddleHub**—your cozy corner for tracking local sports teams! This project is built with Next.js, TypeScript, Tailwind CSS, Zustand, Framer Motion, and tested end-to-end with Cypress.
 
-First, run the development server:
+---
+
+## 🎯 Features
+
+- **League & Team Dashboard**
+  Browse teams in your favorite league using the [balldontlie](https://www.balldontlie.io/) API (NBA, NFL, MLB, EPL).
+- **Favorites**
+  Mark teams as favorites; state managed by Zustand.
+- **Animated UI**
+  Card flips and entrance animations powered by Framer Motion.
+- **Responsive Design**
+  Mobile-first layout styled entirely with Tailwind CSS.
+- **End-to-End Testing**
+  Smoke tests with Cypress to ensure core functionality.
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to get HuddleHub running on your local machine.
+
+### Prerequisites
+
+- **Node.js** v18 or higher
+- **npm** v9 or higher
+- **Git**
+
+(Optional) **nvm** for managing Node versions
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/[actual-username]/huddle-hub.git
+   cd huddle-hub
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Verify Node version**
+
+   ```bash
+   node -v   # should be v18.x.x
+   ```
+
+---
+
+## 🏃‍♂️ Development
+
+Start the Next.js development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser at [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧪 Testing with Cypress
 
-## Learn More
+HuddleHub includes a basic smoke test to verify the home page renders correctly.
 
-To learn more about Next.js, take a look at the following resources:
+1. **Start the app**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Open Cypress UI**
 
-## Deploy on Vercel
+   ```bash
+   npm run cy:open
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Run headless tests**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   npm run cy:run
+   ```
+
+---
+
+## 📦 Production
+
+Build and start the optimized production bundle:
+
+```bash
+npm run build
+npm run start
+```
+
+---
+
+## 🗂 Project Structure
+
+```
+huddle-hub/
+├── cypress/             # E2E tests
+│   └── e2e/home.cy.ts
+├── public/              # Static assets
+├── src/
+│   └── app/
+│       ├── globals.css  # Tailwind directives
+│       ├── layout.tsx   # Root layout
+│       └── page.tsx     # Home page
+├── cypress.config.ts    # Cypress configuration
+├── postcss.config.js    # PostCSS + Tailwind plugin
+├── tailwind.config.js   # Tailwind CSS configuration
+├── next.config.js       # Next.js configuration
+├── package.json         # Project metadata & scripts
+└── README.md            # This file
+```
+
+---
+
+## 💻 Built With
+
+- [Next.js](https://nextjs.org/) & TypeScript
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Zustand](https://github.com/pmndrs/zustand)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Cypress](https://www.cypress.io/)
+- [balldontlie API](https://www.balldontlie.io/)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+> **Teamwork makes the dream work!** 🏆

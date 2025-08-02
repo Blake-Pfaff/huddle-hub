@@ -1,5 +1,4 @@
-// src/app/layout.tsx
-import "./globals.css"; // ← this is critical
+import "./globals.css"; //
 
 export default function RootLayout({
   children,
@@ -12,4 +11,3 @@ export default function RootLayout({
     </html>
   );
 }
-// Note: Ensure that Tailwind CSS is properly configured in your project
