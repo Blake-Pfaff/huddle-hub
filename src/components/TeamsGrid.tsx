@@ -9,7 +9,7 @@ export default function TeamsGrid({ league }: { league: string }) {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-      {teams!.map((team) => (
+      {teams?.map((team) => (
         <div
           key={team.id}
           className="p-4 bg-white rounded shadow hover:shadow-lg transition"

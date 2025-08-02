@@ -1,30 +1,44 @@
 "use client";
 import { useState } from "react";
-import LeagueSelector from "@/components/LeagueSelector";
+import { useTeams } from "@/lib/hooks/useTeams";
 import TeamsGrid from "@/components/TeamsGrid";
 
 export default function Page() {
-  const [league, setLeague] = useState<string | null>(null);
+  const [selectedTeamId, setSelectedTeamId] = useState<number | null>(null);
+  const { data: teams, isLoading, error } = useTeams();
+
+  if (isLoading) return <p>Loading teams…</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <main className="p-8">
-      {!league ? (
+      {selectedTeamId === null ? (
         <>
-          <h1 className="text-2xl font-bold mb-4">Choose a League</h1>
-          <LeagueSelector onSelect={setLeague} />
+          <h1 className="text-2xl font-bold mb-4">NBA Teams</h1>
+          <div className="flex flex-wrap gap-2">
+            {teams!.map((team) => (
+              <button
+                key={team.id}
+                className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+                onClick={() => setSelectedTeamId(team.id)}
+              >
+                {team.abbreviation}
+              </button>
+            ))}
+          </div>
         </>
       ) : (
         <>
           <button
             className="mb-4 px-3 py-1 text-sm text-blue-600 underline"
-            onClick={() => setLeague(null)}
+            onClick={() => setSelectedTeamId(null)}
           >
-            ← Back
+            ← Back to teams
           </button>
           <h2 className="text-xl font-semibold mb-2">
-            {league.toUpperCase()} Teams
+            {teams!.find((t) => t.id === selectedTeamId)?.full_name}
           </h2>
-          <TeamsGrid league={league} />
+          {/* TODO: fetch & display more details (roster, stats, etc.) */}
         </>
       )}
     </main>

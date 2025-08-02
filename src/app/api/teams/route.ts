@@ -1,34 +1,23 @@
 import { NextResponse } from "next/server";
-import { leagueToTeamEndpoint, Team, League } from "@/lib/api";
+import { NBA_TEAMS_ENDPOINT, Team } from "@/lib/api";
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const league = (searchParams.get("league") || "nba") as League;
-  const url = leagueToTeamEndpoint[league];
-
+export async function GET() {
   try {
-    const apiKey = process.env.BALLDONTLIE_KEY;
-    const res = await fetch(url, {
-      headers: {
-        Authorization: apiKey!,
-        Accept: "application/json",
-      },
+    const apiKey = process.env.BALLDONTLIE_KEY!;
+    const res = await fetch(NBA_TEAMS_ENDPOINT, {
+      headers: { Authorization: apiKey, Accept: "application/json" },
     });
 
     if (!res.ok) {
-      console.error(
-        "[api/teams] upstream status:",
-        res.status,
-        await res.text()
-      );
+      const text = await res.text();
+      console.error("[api/teams] upstream status:", res.status, text);
       return NextResponse.json(
         { error: "Upstream error", status: res.status },
         { status: 502 }
       );
     }
 
-    // sanity‐check the content type
-    const contentType = res.headers.get("content-type") || "";
+    const contentType = res.headers.get("content-type")!;
     if (!contentType.includes("application/json")) {
       console.error("[api/teams] wrong content-type:", contentType);
       return NextResponse.json(
@@ -37,9 +26,8 @@ export async function GET(request: Request) {
       );
     }
 
-    const json = await res.json();
-    const teams: Team[] = json.data;
-    return NextResponse.json(teams);
+    const { data }: { data: Team[] } = await res.json();
+    return NextResponse.json(data);
   } catch (err) {
     console.error("[api/teams] fetch failed", err);
     return NextResponse.json({ error: "Fetch exception" }, { status: 502 });

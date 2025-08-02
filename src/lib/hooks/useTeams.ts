@@ -1,14 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchTeams, Team, League } from "../api";
+import { fetchTeams, Team } from "../api";
 
-export function useTeams(league: League | null) {
+export function useTeams() {
   return useQuery<Team[], Error>({
-    queryKey: ["teams", league],
-    queryFn: () => {
-      if (league !== "nba") return Promise.resolve([]);
-      return fetchTeams("nba");
-    },
-    enabled: !!league,
+    queryKey: ["teams", "nba"],
+    queryFn: () => fetchTeams(),
     staleTime: 5 * 60 * 1000,
   });
 }

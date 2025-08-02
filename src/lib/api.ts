@@ -1,15 +1,7 @@
-export type League = "nba" | "nfl" | "mlb" | "epl";
+export type League = "nba";
 
-export const fetchLeagues = async (): Promise<League[]> => {
-  return ["nba", "nfl", "mlb", "epl"];
-};
-
-export const leagueToTeamEndpoint: Record<League, string> = {
-  nba: "https://api.balldontlie.io/v1/teams?per_page=30",
-  nfl: "",
-  mlb: "",
-  epl: "",
-};
+export const NBA_TEAMS_ENDPOINT =
+  "https://api.balldontlie.io/v1/teams?per_page=30";
 
 export type Team = {
   id: number;
@@ -20,8 +12,8 @@ export type Team = {
   division?: string;
 };
 
-export const fetchTeams = async (league: League): Promise<Team[]> => {
-  const res = await fetch(`/api/teams?league=${league}`);
+export const fetchTeams = async (): Promise<Team[]> => {
+  const res = await fetch("/api/teams");
   if (!res.ok) throw new Error("Network response was not ok");
   return res.json();
 };
